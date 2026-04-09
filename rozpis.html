@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KubaLabs | Generovat rozpis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Boční menu">
+      <h2>Menu</h2>
+      <a class="nav-btn" href="hry.html">Hry</a>
+      <a class="nav-btn active" href="nastroje.html">Nástroje</a>
+      <a class="nav-btn" href="index.html">Info</a>
+    </aside>
+
+    <div class="content">
+      <section class="card" aria-label="Generátor rozpisu">
+        <h3>Generovat rozpis</h3>
+
+        <div class="generator-top-row">
+          <div class="form-row">
+            <label for="teamCount">Počet týmů (pouze sudé číslo)</label>
+            <input id="teamCount" type="number" min="2" step="2" placeholder="Např. 8" />
+          </div>
+
+          <button id="generateScheduleBtn" class="btn btn-primary" type="button">Generovat</button>
+        </div>
+
+        <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+
+        <div class="generator-layout">
+          <div class="table-wrapper">
+            <table class="team-table" aria-label="Tabulka týmů">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Tým</th>
+                </tr>
+              </thead>
+              <tbody id="teamTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="schedule-panel" id="schedulePanel" aria-label="Vygenerovaný rozpis"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const teamCountInput = document.getElementById('teamCount');
+    const teamTableBody = document.getElementById('teamTableBody');
+    const formMessage = document.getElementById('formMessage');
+    const generateScheduleBtn = document.getElementById('generateScheduleBtn');
+    const schedulePanel = document.getElementById('schedulePanel');
+
+    function getTeamCount() {
+      return Math.max(0, Number.parseInt(teamCountInput.value, 10) || 0);
+    }
+
+    function isValidTeamCount(teamCount) {
+      return teamCount >= 2 && teamCount % 2 === 0;
+    }
+
+    function setFormMessage(message, type = 'neutral') {
+      formMessage.textContent = message;
+      formMessage.dataset.type = type;
+    }
+
+    function clearSchedule() {
+      schedulePanel.innerHTML = '';
+    }
+
+    function generateTeamRows() {
+      const teamCount = getTeamCount();
+      teamTableBody.innerHTML = '';
+      clearSchedule();
+
+      if (!teamCount) {
+        setFormMessage('', 'neutral');
+        return;
+      }
+
+      if (!isValidTeamCount(teamCount)) {
+        setFormMessage('Počet týmů musí být sudé číslo (minimálně 2).', 'error');
+        return;
+      }
+
+      setFormMessage('', 'neutral');
+
+      for (let i = 1; i <= teamCount; i += 1) {
+        const row = document.createElement('tr');
+
+        const indexCell = document.createElement('td');
+        indexCell.textContent = i;
+
+        const nameCell = document.createElement('td');
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = `Tým ${i}`;
+        nameInput.setAttribute('aria-label', `Název týmu ${i}`);
+        nameCell.appendChild(nameInput);
+
+        row.appendChild(indexCell);
+        row.appendChild(nameCell);
+        teamTableBody.appendChild(row);
+      }
+    }
+
+    function readTeamNames() {
+      const nameInputs = [...teamTableBody.querySelectorAll('input')];
+      return nameInputs.map((input, index) => input.value.trim() || `Tým ${index + 1}`);
+    }
+
+    function buildRoundRobinRounds(teams) {
+      const rotation = [...teams];
+      const rounds = [];
+      const totalRounds = rotation.length - 1;
+      const matchesPerRound = rotation.length / 2;
+
+      for (let roundIndex = 0; roundIndex < totalRounds; roundIndex += 1) {
+        const matches = [];
+
+        for (let matchIndex = 0; matchIndex < matchesPerRound; matchIndex += 1) {
+          const home = rotation[matchIndex];
+          const away = rotation[rotation.length - 1 - matchIndex];
+          matches.push([home, away]);
+        }
+
+        rounds.push(matches);
+
+        const fixedTeam = rotation[0];
+        const movableTeams = rotation.slice(1);
+        movableTeams.unshift(movableTeams.pop());
+        rotation.splice(0, rotation.length, fixedTeam, ...movableTeams);
+      }
+
+      return rounds;
+    }
+
+    function renderSchedule(rounds) {
+      clearSchedule();
+
+      const title = document.createElement('h4');
+      title.textContent = 'Rozpis (každý s každým)';
+      schedulePanel.appendChild(title);
+
+      rounds.forEach((roundMatches, roundIndex) => {
+        const roundCard = document.createElement('div');
+        roundCard.className = 'round-card';
+
+        const roundHeading = document.createElement('h5');
+        roundHeading.textContent = `Kolo ${roundIndex + 1}`;
+
+        const list = document.createElement('ul');
+
+        roundMatches.forEach(([home, away]) => {
+          const item = document.createElement('li');
+          item.textContent = `${home} vs ${away}`;
+          list.appendChild(item);
+        });
+
+        roundCard.appendChild(roundHeading);
+        roundCard.appendChild(list);
+        schedulePanel.appendChild(roundCard);
+      });
+    }
+
+    function onGenerateScheduleClick() {
+      const teamCount = getTeamCount();
+
+      if (!isValidTeamCount(teamCount)) {
+        setFormMessage('Počet týmů musí být sudé číslo (minimálně 2).', 'error');
+        clearSchedule();
+        return;
+      }
+
+      const teams = readTeamNames();
+      const rounds = buildRoundRobinRounds(teams);
+      setFormMessage('Rozpis byl vygenerován.', 'success');
+      renderSchedule(rounds);
+    }
+
+    teamCountInput.addEventListener('input', generateTeamRows);
+    generateScheduleBtn.addEventListener('click', onGenerateScheduleClick);
+  </script>
+</body>
+</html>

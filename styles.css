@@ -215,3 +215,133 @@ footer {
     width: 100%;
   }
 }
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 260px;
+  margin-bottom: 1.1rem;
+}
+
+.form-row label {
+  font-weight: 600;
+}
+
+.form-row input,
+.team-table input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(30, 41, 59, 0.45);
+  color: var(--text);
+  padding: 0.62rem 0.7rem;
+  font-size: 0.98rem;
+}
+
+.team-table input::placeholder,
+.form-row input::placeholder {
+  color: var(--muted);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.team-table th,
+.team-table td {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0.7rem;
+  text-align: left;
+}
+
+.team-table th {
+  color: var(--accent-2);
+  font-weight: 700;
+  background: rgba(30, 41, 59, 0.4);
+}
+
+.team-table td:first-child {
+  width: 64px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.generator-top-row {
+  display: flex;
+  align-items: end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.form-message {
+  color: var(--muted);
+  min-height: 1.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.form-message[data-type='error'] {
+  color: #fda4af;
+}
+
+.form-message[data-type='success'] {
+  color: #86efac;
+}
+
+.generator-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.schedule-panel {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.35);
+  padding: 1rem;
+  min-height: 100%;
+}
+
+.schedule-panel h4 {
+  color: var(--accent-2);
+  margin-bottom: 0.8rem;
+}
+
+.round-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 0.7rem;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.round-card + .round-card {
+  margin-top: 0.65rem;
+}
+
+.round-card h5 {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.round-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.round-card li {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .generator-layout {
+    grid-template-columns: 1fr;
+  }
+}
