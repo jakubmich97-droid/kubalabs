@@ -271,3 +271,77 @@ footer {
   text-align: center;
   font-weight: 700;
 }
+
+.generator-top-row {
+  display: flex;
+  align-items: end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.form-message {
+  color: var(--muted);
+  min-height: 1.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.form-message[data-type='error'] {
+  color: #fda4af;
+}
+
+.form-message[data-type='success'] {
+  color: #86efac;
+}
+
+.generator-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.schedule-panel {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.35);
+  padding: 1rem;
+  min-height: 100%;
+}
+
+.schedule-panel h4 {
+  color: var(--accent-2);
+  margin-bottom: 0.8rem;
+}
+
+.round-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 0.7rem;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.round-card + .round-card {
+  margin-top: 0.65rem;
+}
+
+.round-card h5 {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.round-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.round-card li {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .generator-layout {
+    grid-template-columns: 1fr;
+  }
+}
