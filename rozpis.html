@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KubaLabs | Generovat rozpis</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Boční menu">
+      <h2>Menu</h2>
+      <a class="nav-btn" href="hry.html">Hry</a>
+      <a class="nav-btn active" href="nastroje.html">Nástroje</a>
+      <a class="nav-btn" href="index.html">Info</a>
+    </aside>
+
+    <div class="content">
+      <section class="card" aria-label="Generátor rozpisu">
+        <h3>Generovat rozpis</h3>
+        <div class="form-row">
+          <label for="teamCount">Počet týmů</label>
+          <input id="teamCount" type="number" min="1" step="1" placeholder="Např. 8" />
+        </div>
+
+        <div class="table-wrapper">
+          <table class="team-table" aria-label="Tabulka týmů">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tým</th>
+              </tr>
+            </thead>
+            <tbody id="teamTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const teamCountInput = document.getElementById('teamCount');
+    const teamTableBody = document.getElementById('teamTableBody');
+
+    function generateTeamRows() {
+      const teamCount = Math.max(0, Number.parseInt(teamCountInput.value, 10) || 0);
+      teamTableBody.innerHTML = '';
+
+      for (let i = 1; i <= teamCount; i += 1) {
+        const row = document.createElement('tr');
+
+        const indexCell = document.createElement('td');
+        indexCell.textContent = i;
+
+        const nameCell = document.createElement('td');
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = `Tým ${i}`;
+        nameInput.setAttribute('aria-label', `Název týmu ${i}`);
+        nameCell.appendChild(nameInput);
+
+        row.appendChild(indexCell);
+        row.appendChild(nameCell);
+        teamTableBody.appendChild(row);
+      }
+    }
+
+    teamCountInput.addEventListener('input', generateTeamRows);
+  </script>
+</body>
+</html>
