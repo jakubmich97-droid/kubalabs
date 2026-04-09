@@ -26,6 +26,7 @@
           </div>
 
           <button id="generateScheduleBtn" class="btn btn-primary" type="button">Generovat</button>
+          <button id="resetBtn" class="btn btn-secondary" type="button">Reset</button>
         </div>
 
         <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
@@ -54,6 +55,7 @@
     const teamTableBody = document.getElementById('teamTableBody');
     const formMessage = document.getElementById('formMessage');
     const generateScheduleBtn = document.getElementById('generateScheduleBtn');
+    const resetBtn = document.getElementById('resetBtn');
     const schedulePanel = document.getElementById('schedulePanel');
 
     function getTeamCount() {
@@ -147,25 +149,18 @@
       title.textContent = 'Rozpis (každý s každým)';
       schedulePanel.appendChild(title);
 
+      const list = document.createElement('ul');
+      list.className = 'schedule-lines';
+
       rounds.forEach((roundMatches, roundIndex) => {
-        const roundCard = document.createElement('div');
-        roundCard.className = 'round-card';
-
-        const roundHeading = document.createElement('h5');
-        roundHeading.textContent = `Kolo ${roundIndex + 1}`;
-
-        const list = document.createElement('ul');
-
         roundMatches.forEach(([home, away]) => {
           const item = document.createElement('li');
-          item.textContent = `${home} vs ${away}`;
+          item.textContent = `${roundIndex + 1}. kolo ${home} vs ${away}`;
           list.appendChild(item);
         });
-
-        roundCard.appendChild(roundHeading);
-        roundCard.appendChild(list);
-        schedulePanel.appendChild(roundCard);
       });
+
+      schedulePanel.appendChild(list);
     }
 
     function onGenerateScheduleClick() {
@@ -183,8 +178,17 @@
       renderSchedule(rounds);
     }
 
+    function onResetClick() {
+      teamCountInput.value = '';
+      teamTableBody.innerHTML = '';
+      clearSchedule();
+      setFormMessage('Všechna data byla vymazána.', 'neutral');
+      teamCountInput.focus();
+    }
+
     teamCountInput.addEventListener('input', generateTeamRows);
     generateScheduleBtn.addEventListener('click', onGenerateScheduleClick);
+    resetBtn.addEventListener('click', onResetClick);
   </script>
 </body>
 </html>
