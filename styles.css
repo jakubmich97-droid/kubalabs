@@ -215,3 +215,59 @@ footer {
     width: 100%;
   }
 }
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 260px;
+  margin-bottom: 1.1rem;
+}
+
+.form-row label {
+  font-weight: 600;
+}
+
+.form-row input,
+.team-table input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(30, 41, 59, 0.45);
+  color: var(--text);
+  padding: 0.62rem 0.7rem;
+  font-size: 0.98rem;
+}
+
+.team-table input::placeholder,
+.form-row input::placeholder {
+  color: var(--muted);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.team-table th,
+.team-table td {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0.7rem;
+  text-align: left;
+}
+
+.team-table th {
+  color: var(--accent-2);
+  font-weight: 700;
+  background: rgba(30, 41, 59, 0.4);
+}
+
+.team-table td:first-child {
+  width: 64px;
+  text-align: center;
+  font-weight: 700;
+}
