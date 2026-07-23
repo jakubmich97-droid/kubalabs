@@ -148,16 +148,17 @@
           </div>
         </a>
 
-        <a class="project-card reveal" data-category="app" data-search="tenis kuba filip bilance zápasy statistiky" href="https://jakubmich97-droid.github.io/tenis/" target="_blank" rel="noopener noreferrer">
+        <a class="project-card locked-card reveal" data-category="app" data-search="tenis kuba filip bilance zápasy statistiky" data-protected-app="tenis" href="https://jakubmich97-droid.github.io/tenis/" target="_blank" rel="noopener noreferrer" aria-label="Tenisová bilance – aplikace chráněná heslem">
           <div class="card-visual visual-tennis">
             <span class="project-index">05</span>
+            <span class="card-lock" aria-hidden="true"></span>
             <span class="sport-glyph ball" aria-hidden="true">●</span>
           </div>
           <div class="card-content">
-            <div class="card-meta"><span>Aplikace · Tenis</span><span class="live-badge">Live</span></div>
+            <div class="card-meta"><span>Aplikace · Tenis</span><span class="locked-badge">Zamčeno</span></div>
             <h3>Tenisová bilance</h3>
             <p>Osobní head-to-head statistika, historie výsledků, povrchy a aktuální forma Kuba vs Filip.</p>
-            <div class="card-footer"><span>Otevřít aplikaci</span><span class="arrow">↗</span></div>
+            <div class="card-footer"><span>Odemknout aplikaci</span><span class="arrow">→</span></div>
           </div>
         </a>
 
@@ -225,6 +226,22 @@
       </div>
     </section>
   </main>
+
+  <dialog class="access-dialog" id="access-dialog" aria-labelledby="access-dialog-title">
+    <form class="access-form" id="access-form">
+      <button class="dialog-close" type="button" aria-label="Zavřít">×</button>
+      <div class="dialog-lock" aria-hidden="true"></div>
+      <p class="section-kicker">Chráněný projekt</p>
+      <h2 id="access-dialog-title">Tenisová bilance</h2>
+      <p class="dialog-copy">Pro otevření aplikace zadej přístupové heslo.</p>
+      <label class="password-field" for="access-password">
+        <span>Heslo</span>
+        <input id="access-password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <p class="password-error" id="password-error" role="alert" aria-live="polite"></p>
+      <button class="button primary" type="submit">Odemknout <span>→</span></button>
+    </form>
+  </dialog>
 
   <footer class="site-footer">
     <div class="page-shell">
