@@ -1,194 +1,182 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KubaLabs | Generovat rozpis</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Bezplatný generátor turnajového rozpisu každý s každým.">
+  <title>Generátor rozpisu | KubaLabs</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar" aria-label="Boční menu">
-      <h2>Menu</h2>
-      <a class="nav-btn" href="hry.html">Hry</a>
-      <a class="nav-btn active" href="nastroje.html">Nástroje</a>
-      <a class="nav-btn" href="index.html">Info</a>
-    </aside>
-
-    <div class="content">
-      <section class="card" aria-label="Generátor rozpisu">
-        <h3>Generovat rozpis</h3>
-
-        <div class="generator-top-row">
-          <div class="form-row">
-            <label for="teamCount">Počet týmů (pouze sudé číslo)</label>
-            <input id="teamCount" type="number" min="2" step="2" placeholder="Např. 8" />
-          </div>
-
-          <button id="generateScheduleBtn" class="btn btn-primary" type="button">Generovat</button>
-          <button id="resetBtn" class="btn btn-secondary" type="button">Reset</button>
-        </div>
-
-        <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
-
-        <div class="generator-layout">
-          <div class="table-wrapper">
-            <table class="team-table" aria-label="Tabulka týmů">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Tým</th>
-                </tr>
-              </thead>
-              <tbody id="teamTableBody"></tbody>
-            </table>
-          </div>
-
-          <div class="schedule-panel" id="schedulePanel" aria-label="Vygenerovaný rozpis"></div>
-        </div>
-      </section>
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><span class="sr-only">Otevřít menu</span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Hlavní navigace">
+        <a href="index.html">Hub</a><a href="hry.html">Hry</a><a class="active" href="nastroje.html">Nástroje</a>
+        <a class="nav-github" href="https://github.com/jakubmich97-droid" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main id="main" class="generator-page page-shell">
+    <div class="breadcrumb"><a href="nastroje.html">Nástroje</a><span>/</span><span>Generátor rozpisu</span></div>
+    <section class="generator-heading reveal">
+      <div><p class="section-kicker">Round-robin</p><h1>Generátor turnajového rozpisu</h1><p>Zadej týmy a nech si připravit všechna kola systému každý s každým.</p></div>
+      <div class="generator-step"><strong>3</strong><span>jednoduché<br>kroky</span></div>
+    </section>
+
+    <section class="generator-card reveal">
+      <div class="generator-controls">
+        <div class="control-heading"><span>01</span><div><h2>Počet týmů</h2><p>Zadej sudé číslo od 2 výše.</p></div></div>
+        <label class="number-field" for="teamCount"><span>Počet týmů</span><input id="teamCount" type="number" min="2" step="2" inputmode="numeric" placeholder="Např. 8"></label>
+        <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="generator-workspace">
+        <div class="team-panel">
+          <div class="panel-heading"><span>02</span><div><h2>Názvy týmů</h2><p>Volitelné — prázdné názvy doplníme.</p></div></div>
+          <div class="team-list" id="teamTableBody"><div class="panel-placeholder">Nejdřív zadej počet týmů.</div></div>
+        </div>
+        <div class="schedule-panel">
+          <div class="panel-heading"><span>03</span><div><h2>Hotový rozpis</h2><p>Jednotlivá kola a zápasy.</p></div></div>
+          <div id="schedulePanel"><div class="panel-placeholder">Rozpis se zobrazí tady.</div></div>
+        </div>
+      </div>
+
+      <div class="generator-actions">
+        <button id="generateScheduleBtn" class="button primary" type="button">Vygenerovat rozpis <span>→</span></button>
+        <button id="copyScheduleBtn" class="button ghost" type="button" disabled>Kopírovat</button>
+        <button id="resetBtn" class="text-button" type="button">Vymazat vše</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="page-shell"><a class="brand compact" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a><p>Jednoduše každý s každým.</p><span>© <span data-current-year>2026</span> Jakub Michálek</span></div></footer>
 
   <script>
     const teamCountInput = document.getElementById('teamCount');
-    const teamTableBody = document.getElementById('teamTableBody');
+    const teamList = document.getElementById('teamTableBody');
     const formMessage = document.getElementById('formMessage');
-    const generateScheduleBtn = document.getElementById('generateScheduleBtn');
-    const resetBtn = document.getElementById('resetBtn');
+    const generateButton = document.getElementById('generateScheduleBtn');
+    const copyButton = document.getElementById('copyScheduleBtn');
+    const resetButton = document.getElementById('resetBtn');
     const schedulePanel = document.getElementById('schedulePanel');
+    let currentRounds = [];
 
-    function getTeamCount() {
-      return Math.max(0, Number.parseInt(teamCountInput.value, 10) || 0);
-    }
+    const getCount = () => Math.max(0, Number.parseInt(teamCountInput.value, 10) || 0);
+    const isValid = count => count >= 2 && count % 2 === 0;
 
-    function isValidTeamCount(teamCount) {
-      return teamCount >= 2 && teamCount % 2 === 0;
-    }
-
-    function setFormMessage(message, type = 'neutral') {
-      formMessage.textContent = message;
+    function message(text = '', type = 'neutral') {
+      formMessage.textContent = text;
       formMessage.dataset.type = type;
     }
 
-    function clearSchedule() {
-      schedulePanel.innerHTML = '';
+    function placeholder(target, text) {
+      target.innerHTML = `<div class="panel-placeholder">${text}</div>`;
     }
 
-    function generateTeamRows() {
-      const teamCount = getTeamCount();
-      teamTableBody.innerHTML = '';
-      clearSchedule();
-
-      if (!teamCount) {
-        setFormMessage('', 'neutral');
+    function renderTeamInputs() {
+      const count = getCount();
+      currentRounds = [];
+      copyButton.disabled = true;
+      placeholder(schedulePanel, 'Rozpis se zobrazí tady.');
+      if (!count) {
+        placeholder(teamList, 'Nejdřív zadej počet týmů.');
+        message();
         return;
       }
-
-      if (!isValidTeamCount(teamCount)) {
-        setFormMessage('Počet týmů musí být sudé číslo (minimálně 2).', 'error');
+      if (!isValid(count)) {
+        placeholder(teamList, 'Počet týmů musí být sudý.');
+        message('Zadej sudý počet týmů, minimálně 2.', 'error');
         return;
       }
-
-      setFormMessage('', 'neutral');
-
-      for (let i = 1; i <= teamCount; i += 1) {
-        const row = document.createElement('tr');
-
-        const indexCell = document.createElement('td');
-        indexCell.textContent = i;
-
-        const nameCell = document.createElement('td');
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.placeholder = `Tým ${i}`;
-        nameInput.setAttribute('aria-label', `Název týmu ${i}`);
-        nameCell.appendChild(nameInput);
-
-        row.appendChild(indexCell);
-        row.appendChild(nameCell);
-        teamTableBody.appendChild(row);
+      message();
+      teamList.innerHTML = '';
+      for (let i = 1; i <= count; i += 1) {
+        const label = document.createElement('label');
+        label.className = 'team-input-row';
+        label.innerHTML = `<span>${String(i).padStart(2, '0')}</span><input type="text" placeholder="Tým ${i}" aria-label="Název týmu ${i}">`;
+        teamList.appendChild(label);
       }
     }
 
-    function readTeamNames() {
-      const nameInputs = [...teamTableBody.querySelectorAll('input')];
-      return nameInputs.map((input, index) => input.value.trim() || `Tým ${index + 1}`);
+    function teamNames() {
+      return [...teamList.querySelectorAll('input')].map((input, index) => input.value.trim() || `Tým ${index + 1}`);
     }
 
-    function buildRoundRobinRounds(teams) {
+    function buildRounds(teams) {
       const rotation = [...teams];
       const rounds = [];
-      const totalRounds = rotation.length - 1;
-      const matchesPerRound = rotation.length / 2;
-
-      for (let roundIndex = 0; roundIndex < totalRounds; roundIndex += 1) {
+      for (let round = 0; round < rotation.length - 1; round += 1) {
         const matches = [];
-
-        for (let matchIndex = 0; matchIndex < matchesPerRound; matchIndex += 1) {
-          const home = rotation[matchIndex];
-          const away = rotation[rotation.length - 1 - matchIndex];
-          matches.push([home, away]);
+        for (let match = 0; match < rotation.length / 2; match += 1) {
+          matches.push([rotation[match], rotation[rotation.length - 1 - match]]);
         }
-
         rounds.push(matches);
-
-        const fixedTeam = rotation[0];
-        const movableTeams = rotation.slice(1);
-        movableTeams.unshift(movableTeams.pop());
-        rotation.splice(0, rotation.length, fixedTeam, ...movableTeams);
+        rotation.splice(1, 0, rotation.pop());
       }
-
       return rounds;
     }
 
-    function renderSchedule(rounds) {
-      clearSchedule();
-
-      const title = document.createElement('h4');
-      title.textContent = 'Rozpis (každý s každým)';
-      schedulePanel.appendChild(title);
-
-      const list = document.createElement('ul');
-      list.className = 'schedule-lines';
-
-      rounds.forEach((roundMatches, roundIndex) => {
-        roundMatches.forEach(([home, away]) => {
-          const item = document.createElement('li');
-          item.textContent = `${roundIndex + 1}. kolo ${home} vs ${away}`;
-          list.appendChild(item);
-        });
+    function renderRounds(rounds) {
+      schedulePanel.innerHTML = '';
+      const grid = document.createElement('div');
+      grid.className = 'round-grid';
+      rounds.forEach((matches, index) => {
+        const round = document.createElement('article');
+        round.className = 'round-card';
+        const matchHtml = matches.map(([home, away]) => `<li><span>${home}</span><b>vs</b><span>${away}</span></li>`).join('');
+        round.innerHTML = `<h3>${index + 1}. kolo</h3><ul>${matchHtml}</ul>`;
+        grid.appendChild(round);
       });
-
-      schedulePanel.appendChild(list);
+      schedulePanel.appendChild(grid);
     }
 
-    function onGenerateScheduleClick() {
-      const teamCount = getTeamCount();
-
-      if (!isValidTeamCount(teamCount)) {
-        setFormMessage('Počet týmů musí být sudé číslo (minimálně 2).', 'error');
-        clearSchedule();
+    function generate() {
+      const count = getCount();
+      if (!isValid(count)) {
+        message('Zadej sudý počet týmů, minimálně 2.', 'error');
         return;
       }
-
-      const teams = readTeamNames();
-      const rounds = buildRoundRobinRounds(teams);
-      setFormMessage('Rozpis byl vygenerován.', 'success');
-      renderSchedule(rounds);
+      currentRounds = buildRounds(teamNames());
+      renderRounds(currentRounds);
+      copyButton.disabled = false;
+      message(`Hotovo — ${currentRounds.length} kol a ${count * (count - 1) / 2} zápasů.`, 'success');
+      if (window.innerWidth < 800) schedulePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function onResetClick() {
+    async function copySchedule() {
+      const text = currentRounds.map((matches, index) => `${index + 1}. kolo\n${matches.map(([home, away]) => `${home} vs ${away}`).join('\n')}`).join('\n\n');
+      try {
+        await navigator.clipboard.writeText(text);
+        message('Rozpis je zkopírovaný do schránky.', 'success');
+        copyButton.textContent = 'Zkopírováno ✓';
+        setTimeout(() => { copyButton.textContent = 'Kopírovat'; }, 1800);
+      } catch {
+        message('Kopírování se nepodařilo. Označ rozpis ručně.', 'error');
+      }
+    }
+
+    function reset() {
       teamCountInput.value = '';
-      teamTableBody.innerHTML = '';
-      clearSchedule();
-      setFormMessage('Všechna data byla vymazána.', 'neutral');
+      currentRounds = [];
+      copyButton.disabled = true;
+      placeholder(teamList, 'Nejdřív zadej počet týmů.');
+      placeholder(schedulePanel, 'Rozpis se zobrazí tady.');
+      message();
       teamCountInput.focus();
     }
 
-    teamCountInput.addEventListener('input', generateTeamRows);
-    generateScheduleBtn.addEventListener('click', onGenerateScheduleClick);
-    resetBtn.addEventListener('click', onResetClick);
+    teamCountInput.addEventListener('input', renderTeamInputs);
+    generateButton.addEventListener('click', generate);
+    copyButton.addEventListener('click', copySchedule);
+    resetButton.addEventListener('click', reset);
   </script>
 </body>
 </html>
