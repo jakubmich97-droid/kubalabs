@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Praktické webové nástroje z dílny KubaLabs.">
   <title>KubaLabs | Nástroje</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar" aria-label="Boční menu">
-      <h2>Menu</h2>
-      <a class="nav-btn" href="hry.html">Hry</a>
-      <a class="nav-btn active" href="nastroje.html">Nástroje</a>
-      <a class="nav-btn" href="index.html">Info</a>
-    </aside>
-
-    <div class="content">
-      <section class="card" aria-label="Karta Nástroje">
-        <h3>Nástroje</h3>
-        <p>Vyber nástroj, který chceš otevřít.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="rozpis.html">Generovat rozpis</a>
-        </div>
-      </section>
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><span class="sr-only">Otevřít menu</span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Hlavní navigace">
+        <a href="index.html">Hub</a><a href="hry.html">Hry</a><a class="active" href="nastroje.html">Nástroje</a>
+        <a class="nav-github" href="https://github.com/jakubmich97-droid" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main id="main" class="subpage page-shell">
+    <section class="subpage-hero reveal">
+      <div class="eyebrow"><span class="status-dot"></span> KubaLabs / Nástroje</div>
+      <h1>Méně rutiny.<br><span class="gradient-text">Více hotové práce.</span></h1>
+      <p>Jednoduché utility pro konkrétní úkoly. Bez instalace, bez registrace, rovnou k použití.</p>
+    </section>
+
+    <section class="tool-feature reveal">
+      <div class="tool-feature-copy">
+        <div class="card-meta"><span>Sport · Organizace</span><span class="local-badge">Dostupné</span></div>
+        <h2>Generátor turnajového rozpisu</h2>
+        <p>Zadej sudý počet týmů, uprav jejich názvy a jedním kliknutím vytvoř kompletní rozpis systémem každý s každým.</p>
+        <ul class="feature-list"><li><span>✓</span> Automatický round-robin systém</li><li><span>✓</span> Vlastní názvy týmů</li><li><span>✓</span> Funguje i na telefonu</li></ul>
+        <a class="button primary" href="rozpis.html">Spustit generátor <span>→</span></a>
+      </div>
+      <div class="tool-preview" aria-hidden="true">
+        <div class="preview-header"><span>Turnaj / 1. kolo</span><span>•••</span></div>
+        <div class="preview-match"><span>Tým 1</span><strong>VS</strong><span>Tým 8</span></div>
+        <div class="preview-match"><span>Tým 2</span><strong>VS</strong><span>Tým 7</span></div>
+        <div class="preview-match"><span>Tým 3</span><strong>VS</strong><span>Tým 6</span></div>
+        <div class="preview-match"><span>Tým 4</span><strong>VS</strong><span>Tým 5</span></div>
+      </div>
+    </section>
+
+    <section class="coming-grid reveal">
+      <div><p class="section-kicker">Laboratoř</p><h2>Další nástroje<br>budou přibývat.</h2></div>
+      <p>KubaLabs roste postupně. Každý nový nástroj musí řešit reálný problém — ne jen zabírat místo v menu.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="page-shell"><a class="brand compact" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a><p>Praktické nástroje bez zbytečností.</p><span>© <span data-current-year>2026</span> Jakub Michálek</span></div></footer>
 </body>
 </html>
