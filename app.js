@@ -74,3 +74,53 @@ filterButtons.forEach(button => {
 });
 
 searchInput?.addEventListener('input', filterProjects);
+
+const protectedApp = document.querySelector('[data-protected-app="tenis"]');
+const accessDialog = document.getElementById('access-dialog');
+const accessForm = document.getElementById('access-form');
+const passwordInput = document.getElementById('access-password');
+const passwordError = document.getElementById('password-error');
+const dialogClose = accessDialog?.querySelector('.dialog-close');
+const tennisAccessKey = 'kubalabs-tennis-access';
+const tennisPassword = 'tenis';
+
+function openProtectedApp(url) {
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+protectedApp?.addEventListener('click', event => {
+  event.preventDefault();
+  const targetUrl = protectedApp.href;
+
+  if (sessionStorage.getItem(tennisAccessKey) === 'granted') {
+    openProtectedApp(targetUrl);
+    return;
+  }
+
+  accessDialog?.showModal();
+  accessDialog.dataset.targetUrl = targetUrl;
+  passwordError.textContent = '';
+  accessForm?.reset();
+  setTimeout(() => passwordInput?.focus(), 50);
+});
+
+accessForm?.addEventListener('submit', event => {
+  event.preventDefault();
+
+  if (passwordInput.value.trim().toLocaleLowerCase('cs') !== tennisPassword) {
+    passwordError.textContent = 'Nesprávné heslo. Zkus to znovu.';
+    passwordInput.select();
+    return;
+  }
+
+  sessionStorage.setItem(tennisAccessKey, 'granted');
+  const targetUrl = accessDialog.dataset.targetUrl;
+  accessDialog.close();
+  openProtectedApp(targetUrl);
+});
+
+dialogClose?.addEventListener('click', () => accessDialog.close());
+
+accessDialog?.addEventListener('click', event => {
+  if (event.target === accessDialog) accessDialog.close();
+});
