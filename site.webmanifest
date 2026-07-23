@@ -1,0 +1,17 @@
+{
+  "name": "KubaLabs",
+  "short_name": "KubaLabs",
+  "description": "Hry, aplikace a webové experimenty Jakuba Michálka.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#090b10",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
