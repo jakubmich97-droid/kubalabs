@@ -491,7 +491,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
 .card-meta > span:first-child { color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.live-badge, .local-badge {
+.live-badge, .local-badge, .locked-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -505,6 +505,50 @@ h1, h2, h3, p { margin-top: 0; }
 .live-badge { background: rgba(183,243,74,.1); color: var(--green); }
 .live-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 .local-badge { background: rgba(155,135,245,.12); color: #c6baff; }
+.locked-badge { background: rgba(255,157,87,.11); color: #ffb17c; }
+.locked-badge::before {
+  content: "";
+  width: 6px;
+  height: 5px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+  box-shadow: 0 -4px 0 -2px currentColor;
+}
+.locked-card .card-visual { filter: saturate(.72); }
+.card-lock {
+  position: absolute;
+  z-index: 3;
+  top: 13px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,177,124,.26);
+  border-radius: 9px;
+  background: rgba(9,11,16,.7);
+  color: #ffb17c;
+}
+.card-lock::before, .dialog-lock::before {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 9px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+}
+.card-lock::after, .dialog-lock::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 7px;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+  transform: translate(-50%, -115%);
+}
 .card-content h3 { margin-bottom: 9px; font-size: 1.35rem; letter-spacing: -.035em; }
 .card-content p { margin-bottom: 23px; color: var(--muted); font-size: .86rem; line-height: 1.6; }
 .card-footer {
@@ -520,6 +564,81 @@ h1, h2, h3, p { margin-top: 0; }
 .arrow { color: var(--green); font-size: 1.1rem; transition: transform .2s ease; }
 .project-card:hover .arrow { transform: translate(2px, -2px); }
 .empty-state { padding: 70px 20px; color: var(--muted); text-align: center; }
+
+/* Password dialog */
+.access-dialog {
+  width: min(430px, calc(100% - 28px));
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  background: #11151d;
+  color: var(--text);
+  box-shadow: 0 30px 90px rgba(0,0,0,.65);
+}
+.access-dialog::backdrop {
+  background: rgba(3,5,8,.78);
+  backdrop-filter: blur(8px);
+}
+.access-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 34px;
+}
+.dialog-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.dialog-close:hover { color: var(--text); border-color: var(--line-strong); }
+.dialog-lock {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,177,124,.25);
+  border-radius: 14px;
+  background: rgba(255,157,87,.08);
+  color: #ffb17c;
+}
+.dialog-lock::before { width: 16px; height: 13px; border-width: 2px; }
+.dialog-lock::after { width: 12px; height: 10px; transform: translate(-50%, -115%); }
+.access-form .section-kicker { margin-bottom: 9px; color: #ffb17c; }
+.access-form h2 { margin-bottom: 9px; font-size: 1.8rem; letter-spacing: -.045em; }
+.dialog-copy { margin-bottom: 24px; color: var(--muted); font-size: .9rem; line-height: 1.55; }
+.password-field { display: grid; gap: 8px; }
+.password-field span { color: var(--muted); font-size: .7rem; font-weight: 750; text-transform: uppercase; }
+.password-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 11px;
+  outline: 0;
+  background: #0b0e14;
+  color: var(--text);
+}
+.password-field input:focus {
+  border-color: rgba(255,177,124,.55);
+  box-shadow: 0 0 0 3px rgba(255,157,87,.07);
+}
+.password-error {
+  min-height: 20px;
+  margin: 8px 0 10px;
+  color: var(--danger);
+  font-size: .76rem;
+}
+.access-form .button { width: 100%; }
 
 .now-section { padding-block: 40px 100px; }
 .now-card {
@@ -808,4 +927,5 @@ h1, h2, h3, p { margin-top: 0; }
   .generator-controls, .team-panel, .schedule-panel { padding: 22px 18px; }
   .team-list, .round-grid { grid-template-columns: 1fr; }
   .generator-actions { padding: 20px 18px; }
+  .access-form { padding: 28px 22px 22px; }
 }
