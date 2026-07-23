@@ -1,35 +1,237 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KubaLabs</title>
-  <link rel="stylesheet" href="styles.css" />
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="KubaLabs — osobní digitální hřiště Jakuba Michálka. Hry, sportovní aplikace, webové projekty a praktické nástroje.">
+  <meta property="og:title" content="KubaLabs | Hry, aplikace a experimenty">
+  <meta property="og:description" content="Osobní hub her, aplikací a webových projektů Jakuba Michálka.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jakubmich97-droid.github.io/kubalabs/">
+  <title>KubaLabs | Hry, aplikace a experimenty</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar" aria-label="Boční menu">
-      <h2>Menu</h2>
-      <a class="nav-btn" href="hry.html">Hry</a>
-      <a class="nav-btn" href="nastroje.html">Nástroje</a>
-      <a class="nav-btn active" href="index.html">Info</a>
-    </aside>
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
 
-    <div class="content">
-      <main class="card" id="info">
-        <div class="badge">Simple landing page</div>
-        <h1>Vítej v <span>KubaLabs</span></h1>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="hry.html">Přejít na hry</a>
-          <a class="btn btn-secondary" href="nastroje.html">Přejít na nástroje</a>
-        </div>
-
-        <footer>© 2026 KubaLabs</footer>
-      </main>
-
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="KubaLabs – domů">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>Kuba<span>Labs</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Otevřít menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Hlavní navigace">
+        <a class="active" href="index.html">Hub</a>
+        <a href="hry.html">Hry</a>
+        <a href="nastroje.html">Nástroje</a>
+        <a class="nav-github" href="https://github.com/jakubmich97-droid" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-shell">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="status-dot"></span> Osobní digitální hřiště</div>
+        <h1>Nápady měním na<br><span class="gradient-text">funkční projekty.</span></h1>
+        <p class="hero-lead">Hry, datové experimenty a webové aplikace, které vznikají z potřeby něco pochopit, zjednodušit nebo si prostě pohrát.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projekty">Prozkoumat projekty <span>↓</span></a>
+          <a class="button ghost" href="nastroje.html">Otevřít nástroje</a>
+        </div>
+      </div>
+
+      <div class="hero-console reveal" aria-label="Přehled KubaLabs">
+        <div class="console-top">
+          <div class="console-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span>kubalabs / overview</span>
+        </div>
+        <div class="console-body">
+          <p><span class="code-muted">const</span> focus = [</p>
+          <p class="code-indent"><span class="code-green">"data"</span>, <span class="code-violet">"games"</span>, <span class="code-blue">"web"</span></p>
+          <p>];</p>
+          <div class="console-divider"></div>
+          <div class="mini-stats">
+            <div><strong>8</strong><span>projektů</span></div>
+            <div><strong>4</strong><span>kategorie</span></div>
+            <div><strong>∞</strong><span>nápadů</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section page-shell" id="projekty">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-kicker">Vyber si projekt</p>
+          <h2>Všechno na jednom místě.</h2>
+        </div>
+        <p>Od investičního simulátoru přes sportovní tipovačky až po weby reálných projektů.</p>
+      </div>
+
+      <div class="project-controls reveal">
+        <div class="filter-group" role="group" aria-label="Filtrovat projekty">
+          <button class="filter-button active" type="button" data-filter="all">Vše</button>
+          <button class="filter-button" type="button" data-filter="game">Hry</button>
+          <button class="filter-button" type="button" data-filter="app">Aplikace</button>
+          <button class="filter-button" type="button" data-filter="web">Weby</button>
+          <button class="filter-button" type="button" data-filter="tool">Nástroje</button>
+        </div>
+        <label class="search-box">
+          <span class="sr-only">Hledat projekt</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <input id="project-search" type="search" placeholder="Najít projekt…" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="project-grid">
+        <a class="project-card featured reveal" data-category="game" data-search="invest game trading finance simulator investice" href="https://jakubmich97-droid.github.io/trading/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-invest">
+            <span class="project-index">01</span>
+            <svg class="visual-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 49V33m14 16V23m14 26V31m14 18V13"/><path d="m9 24 13-9 13 8L53 8"/><path d="m44 8h9v9"/></svg>
+            <span class="card-label">Vlajkový projekt</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Hra · Finance</span><span class="live-badge">Live</span></div>
+            <h3>Invest Game</h3>
+            <p>Komplexní simulátor obchodování, nemovitostí, podnikání a budování vlastního portfolia.</p>
+            <div class="card-footer"><span>Spustit hru</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="game" data-search="hockey universe hokej simulátor hráči týmy" href="https://jakubmich97-droid.github.io/hokej_hra/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-hockey">
+            <span class="project-index">02</span>
+            <span class="sport-glyph" aria-hidden="true">🏒</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Hra · Sport</span><span class="live-badge">Live</span></div>
+            <h3>Hockey Universe</h3>
+            <p>Hokejový svět s databází hráčů, týmů, ratingů a vlastním sportovním ekosystémem.</p>
+            <div class="card-footer"><span>Otevřít simulátor</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="app" data-search="ms fotbal 2026 tipovačka betting sázky" href="https://jakubmich97-droid.github.io/MS-Fotbal-2026/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-football">
+            <span class="project-index">03</span>
+            <span class="sport-glyph" aria-hidden="true">⚽</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Aplikace · Fotbal</span><span class="live-badge">Live</span></div>
+            <h3>MS Fotbal 2026</h3>
+            <p>Tipovačka s pořadím, statistikami, bonusovými tipy a vlastním sázkařským simulátorem.</p>
+            <div class="card-footer"><span>Otevřít tipovačku</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="app" data-search="ms hokej 2026 tipovačka statistiky" href="https://jakubmich97-droid.github.io/ms-hokej-tipovacka-2026/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-ice">
+            <span class="project-index">04</span>
+            <span class="sport-glyph" aria-hidden="true">🥅</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Aplikace · Hokej</span><span class="live-badge">Live</span></div>
+            <h3>MS Hokej 2026</h3>
+            <p>Hokejová tipovačka s detailními statistikami, vývojem bodů a historií všech zápasů.</p>
+            <div class="card-footer"><span>Otevřít tipovačku</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="app" data-search="tenis kuba filip bilance zápasy statistiky" href="https://jakubmich97-droid.github.io/tenis/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-tennis">
+            <span class="project-index">05</span>
+            <span class="sport-glyph ball" aria-hidden="true">●</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Aplikace · Tenis</span><span class="live-badge">Live</span></div>
+            <h3>Tenisová bilance</h3>
+            <p>Osobní head-to-head statistika, historie výsledků, povrchy a aktuální forma Kuba vs Filip.</p>
+            <div class="card-footer"><span>Otevřít aplikaci</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="tool" data-search="generátor rozpis turnaj týmy každý s každým" href="rozpis.html">
+          <div class="card-visual visual-schedule">
+            <span class="project-index">06</span>
+            <svg class="visual-icon" viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="13" width="44" height="41" rx="7"/><path d="M10 25h44M22 9v9M42 9v9M20 35h7m10 0h7m-24 9h7m10 0h7"/></svg>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Nástroj · Sport</span><span class="local-badge">KubaLabs</span></div>
+            <h3>Generátor rozpisu</h3>
+            <p>Rychlé vytvoření kompletního turnajového rozpisu systémem každý s každým.</p>
+            <div class="card-footer"><span>Spustit nástroj</span><span class="arrow">→</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="web" data-search="mwm estate vyklízení nemovitostí web firma" href="https://vyklizenimwm.cz/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-mwm">
+            <span class="project-index">07</span>
+            <span class="word-glyph" aria-hidden="true">MWM</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Web · Business</span><span class="live-badge">Live</span></div>
+            <h3>MWM Estate</h3>
+            <p>Firemní prezentace vyklízecích služeb s jasným postupem, nabídkou a kontaktním flow.</p>
+            <div class="card-footer"><span>Navštívit web</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+
+        <a class="project-card reveal" data-category="web" data-search="čipoš domácí zavařeniny guláš eshop objednávka" href="https://jakubmich97-droid.github.io/ciposfadrs/" target="_blank" rel="noopener noreferrer">
+          <div class="card-visual visual-food">
+            <span class="project-index">08</span>
+            <span class="sport-glyph" aria-hidden="true">🌶️</span>
+          </div>
+          <div class="card-content">
+            <div class="card-meta"><span>Web · E-shop</span><span class="live-badge">Live</span></div>
+            <h3>Čipoš fáDr.s</h3>
+            <p>Produktový web domácích zavařenin a gulášů s jednoduchým objednávkovým procesem.</p>
+            <div class="card-footer"><span>Navštívit web</span><span class="arrow">↗</span></div>
+          </div>
+        </a>
+      </div>
+      <p class="empty-state" id="empty-state" hidden>Takový projekt tu zatím není. Zkus jiný výraz.</p>
+    </section>
+
+    <section class="now-section page-shell reveal">
+      <div class="now-card">
+        <div>
+          <p class="section-kicker">Právě ve vývoji</p>
+          <h2>State Simulator</h2>
+          <p>Strategická simulace fungování státu, ekonomiky a rozhodnutí, která mají dlouhodobé následky.</p>
+        </div>
+        <div class="development-pill"><span></span> Vývoj</div>
+      </div>
+    </section>
+
+    <section class="about-section page-shell reveal">
+      <div>
+        <p class="section-kicker">O projektu</p>
+        <h2>Analytika jako hra.<br>Hra jako způsob učení.</h2>
+      </div>
+      <div class="about-copy">
+        <p>Jsem Kuba — datový analytik, fanoušek strategií, sportu a systémů. KubaLabs je místo, kde dávám nápadům funkční podobu a učím se stavěním.</p>
+        <a href="https://github.com/jakubmich97-droid" target="_blank" rel="noopener noreferrer">Prohlédnout zdrojové kódy <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-shell">
+      <a class="brand compact" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a>
+      <p>Navrženo a postaveno z nápadů, dat a zvědavosti.</p>
+      <span>© <span data-current-year>2026</span> Jakub Michálek</span>
+    </div>
+  </footer>
 </body>
 </html>
