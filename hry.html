@@ -1,46 +1,61 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KubaLabs | Hry</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Hry a simulátory z dílny KubaLabs.">
+  <title>KubaLabs | Hry a simulátory</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar" aria-label="Boční menu">
-      <h2>Menu</h2>
-      <a class="nav-btn active" href="hry.html">Hry</a>
-      <a class="nav-btn" href="nastroje.html">Nástroje</a>
-      <a class="nav-btn" href="index.html">Info</a>
-    </aside>
-
-    <div class="content">
-      <section class="card" aria-label="Karta Hry">
-        <h3>Hry</h3>
-        <div class="tiles">
-          <a class="tile" href="https://jakubmich97-droid.github.io/trading/" target="_blank" rel="noopener noreferrer">
-            <div class="tile-title">Invest game simulator</div>
-            <div class="tile-desc">Simulátor investování a obchodování.</div>
-          </a>
-
-          <a class="tile" href="https://jakubmich97-droid.github.io/state/" target="_blank" rel="noopener noreferrer">
-            <div class="tile-title">State simulator</div>
-            <div class="tile-desc">Simulátor pro práci se státem a strategickými rozhodnutími.</div>
-          </a>
-
-          <a class="tile" href="#" aria-disabled="true">
-            <div class="tile-title">Připravovaná hra</div>
-            <div class="tile-desc">Místo pro další herní projekt.</div>
-          </a>
-
-          <a class="tile" href="#" aria-disabled="true">
-            <div class="tile-title">Arcade demo</div>
-            <div class="tile-desc">Prototyp rychlé mini-hry.</div>
-          </a>
-        </div>
-      </section>
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><span class="sr-only">Otevřít menu</span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Hlavní navigace">
+        <a href="index.html">Hub</a><a class="active" href="hry.html">Hry</a><a href="nastroje.html">Nástroje</a>
+        <a class="nav-github" href="https://github.com/jakubmich97-droid" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main id="main" class="subpage page-shell">
+    <section class="subpage-hero reveal">
+      <div class="eyebrow"><span class="status-dot"></span> KubaLabs / Hry</div>
+      <h1>Světy, ve kterých<br><span class="gradient-text">rozhoduješ ty.</span></h1>
+      <p>Strategické simulátory postavené na datech, systémech a důsledcích tvých rozhodnutí.</p>
+    </section>
+
+    <section class="showcase-list">
+      <a class="showcase-card reveal" href="https://jakubmich97-droid.github.io/trading/" target="_blank" rel="noopener noreferrer">
+        <div class="showcase-number">01</div>
+        <div class="showcase-copy"><span>Finance · Strategie</span><h2>Invest Game</h2><p>Začni s omezeným kapitálem. Obchoduj akcie, kupuj nemovitosti, buduj firmy a sleduj, jak se každé rozhodnutí propíše do tvého portfolia.</p><div class="tag-list"><span>Trading</span><span>Reality</span><span>Business</span></div></div>
+        <div class="showcase-action">Hrát <span>↗</span></div>
+      </a>
+      <a class="showcase-card reveal" href="https://jakubmich97-droid.github.io/hokej_hra/" target="_blank" rel="noopener noreferrer">
+        <div class="showcase-number">02</div>
+        <div class="showcase-copy"><span>Sport · Management</span><h2>Hockey Universe</h2><p>Databáze hráčů, ratingy, týmy a základy rostoucího hokejového univerza, ve kterém se budou psát vlastní sportovní příběhy.</p><div class="tag-list"><span>Hokej</span><span>Supabase</span><span>Simulace</span></div></div>
+        <div class="showcase-action">Otevřít <span>↗</span></div>
+      </a>
+      <article class="showcase-card muted-card reveal">
+        <div class="showcase-number">03</div>
+        <div class="showcase-copy"><span>Stát · Ekonomika</span><h2>State Simulator</h2><p>Strategická simulace státu, veřejných financí a politických rozhodnutí. Projekt je nyní ve fázi vývoje.</p><div class="tag-list"><span>Strategie</span><span>Ekonomika</span><span>Ve vývoji</span></div></div>
+        <div class="development-pill"><span></span> Vývoj</div>
+      </article>
+    </section>
+
+    <section class="cta-band reveal">
+      <div><p class="section-kicker">Další projekty</p><h2>Nejen hry.</h2><p>Prohlédni si sportovní aplikace, webové projekty a praktické nástroje na hlavním hubu.</p></div>
+      <a class="button primary" href="index.html#projekty">Zobrazit vše <span>→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="page-shell"><a class="brand compact" href="index.html"><span class="brand-mark">K</span><span>Kuba<span>Labs</span></span></a><p>Hry, data a experimenty.</p><span>© <span data-current-year>2026</span> Jakub Michálek</span></div></footer>
 </body>
 </html>
