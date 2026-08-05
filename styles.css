@@ -407,6 +407,8 @@ h1, h2, h3, p { margin-top: 0; }
 .visual-football::before, .visual-tennis::before { background: #89dd3f; }
 .visual-ice { background: #0d1820; }
 .visual-tennis { background: #17190d; }
+.visual-tripatlas { background: #0b1820; }
+.visual-tripatlas::before { background: linear-gradient(135deg, var(--blue), var(--violet)); }
 .visual-schedule { background: #17131f; }
 .visual-schedule::before { background: var(--violet); }
 .visual-mwm { background: #1b0e0c; }
@@ -433,6 +435,15 @@ h1, h2, h3, p { margin-top: 0; }
   filter: drop-shadow(0 0 18px rgba(183,243,74,.23));
 }
 .visual-schedule .visual-icon { stroke: #c2b6ff; }
+.visual-tripatlas .tripatlas-icon {
+  width: 76px;
+  stroke: #78d8ff;
+  filter: drop-shadow(0 0 18px rgba(82,199,255,.25));
+}
+.tripatlas-icon .map-pin {
+  fill: #111923;
+  stroke: #c5b9ff;
+}
 .sport-glyph {
   position: relative;
   z-index: 2;
@@ -491,7 +502,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
 .card-meta > span:first-child { color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.live-badge, .local-badge, .locked-badge {
+.live-badge, .local-badge, .locked-badge, .development-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -505,6 +516,15 @@ h1, h2, h3, p { margin-top: 0; }
 .live-badge { background: rgba(183,243,74,.1); color: var(--green); }
 .live-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 .local-badge { background: rgba(155,135,245,.12); color: #c6baff; }
+.development-badge { background: rgba(82,199,255,.1); color: #78d8ff; }
+.development-badge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
 .locked-badge { background: rgba(255,157,87,.11); color: #ffb17c; }
 .locked-badge::before {
   content: "";
