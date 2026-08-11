@@ -75,45 +75,67 @@ filterButtons.forEach(button => {
 
 searchInput?.addEventListener('input', filterProjects);
 
-const protectedApp = document.querySelector('[data-protected-app="tenis"]');
+const protectedApps = document.querySelectorAll('[data-protected-app]');
 const accessDialog = document.getElementById('access-dialog');
 const accessForm = document.getElementById('access-form');
 const passwordInput = document.getElementById('access-password');
 const passwordError = document.getElementById('password-error');
+const dialogTitle = document.getElementById('access-dialog-title');
 const dialogClose = accessDialog?.querySelector('.dialog-close');
-const tennisAccessKey = 'kubalabs-tennis-access';
-const tennisPassword = 'tenis';
+
+const protectedAppConfig = {
+  tenis: {
+    title: 'Tenisová bilance',
+    password: 'tenis',
+    accessKey: 'kubalabs-tennis-access'
+  },
+  movienight: {
+    title: 'MovieNight',
+    password: 'film',
+    accessKey: 'kubalabs-movienight-access'
+  }
+};
 
 function openProtectedApp(url) {
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-protectedApp?.addEventListener('click', event => {
-  event.preventDefault();
-  const targetUrl = protectedApp.href;
+protectedApps.forEach(protectedApp => {
+  protectedApp.addEventListener('click', event => {
+    event.preventDefault();
 
-  if (sessionStorage.getItem(tennisAccessKey) === 'granted') {
-    openProtectedApp(targetUrl);
-    return;
-  }
+    const appKey = protectedApp.dataset.protectedApp;
+    const config = protectedAppConfig[appKey];
+    if (!config) return;
 
-  accessDialog?.showModal();
-  accessDialog.dataset.targetUrl = targetUrl;
-  passwordError.textContent = '';
-  accessForm?.reset();
-  setTimeout(() => passwordInput?.focus(), 50);
+    if (sessionStorage.getItem(config.accessKey) === 'granted') {
+      openProtectedApp(protectedApp.href);
+      return;
+    }
+
+    accessDialog?.showModal();
+    accessDialog.dataset.targetUrl = protectedApp.href;
+    accessDialog.dataset.appKey = appKey;
+    if (dialogTitle) dialogTitle.textContent = config.title;
+    passwordError.textContent = '';
+    accessForm?.reset();
+    setTimeout(() => passwordInput?.focus(), 50);
+  });
 });
 
 accessForm?.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (passwordInput.value.trim().toLocaleLowerCase('cs') !== tennisPassword) {
+  const appKey = accessDialog.dataset.appKey;
+  const config = protectedAppConfig[appKey];
+
+  if (!config || passwordInput.value.trim().toLocaleLowerCase('cs') !== config.password) {
     passwordError.textContent = 'Nesprávné heslo. Zkus to znovu.';
     passwordInput.select();
     return;
   }
 
-  sessionStorage.setItem(tennisAccessKey, 'granted');
+  sessionStorage.setItem(config.accessKey, 'granted');
   const targetUrl = accessDialog.dataset.targetUrl;
   accessDialog.close();
   openProtectedApp(targetUrl);
