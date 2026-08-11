@@ -13,7 +13,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css?v=20260811-2">
-  <script src="app.js?v=20260811-1" defer></script>
+  <script src="app.js?v=20260811-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Přeskočit na obsah</a>
@@ -180,9 +180,10 @@
           </div>
         </a>
 
-        <a class="project-card reveal" data-category="app" data-search="movienight filmy seriály tmdb losování večer seznam hodnocení žánry" href="https://jakubmich97-droid.github.io/MovieNight/#top" target="_blank" rel="noopener noreferrer">
+        <a class="project-card locked-card reveal" data-category="app" data-search="movienight filmy seriály tmdb losování večer seznam hodnocení žánry" data-protected-app="movienight" href="https://jakubmich97-droid.github.io/MovieNight/#top" target="_blank" rel="noopener noreferrer" aria-label="MovieNight – aplikace chráněná heslem">
           <div class="card-visual visual-movie">
             <span class="project-index">07</span>
+            <span class="card-lock" aria-hidden="true"></span>
             <svg class="visual-icon movie-icon" viewBox="0 0 64 64" aria-hidden="true">
               <path d="M13 22h38a4 4 0 0 1 4 4v25a5 5 0 0 1-5 5H14a5 5 0 0 1-5-5V26a4 4 0 0 1 4-4Z"/>
               <path d="M9 33h46M14 22l4-13h38l-5 13M28 9l-5 13M42 9l-5 13"/>
@@ -190,10 +191,10 @@
             </svg>
           </div>
           <div class="card-content">
-            <div class="card-meta"><span>Aplikace · Filmy</span><span class="live-badge">Live</span></div>
+            <div class="card-meta"><span>Aplikace · Filmy</span><span class="locked-badge">Zamčeno</span></div>
             <h3>MovieNight</h3>
             <p>Společný seznam filmů a seriálů s TMDb vyhledáváním, filtry a chytrým losováním na dnešní večer.</p>
-            <div class="card-footer"><span>Otevřít aplikaci</span><span class="arrow">↗</span></div>
+            <div class="card-footer"><span>Odemknout aplikaci</span><span class="arrow">→</span></div>
           </div>
         </a>
 
