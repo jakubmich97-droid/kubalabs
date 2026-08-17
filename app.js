@@ -93,6 +93,11 @@ const protectedAppConfig = {
     title: 'MovieNight',
     password: 'film',
     accessKey: 'kubalabs-movienight-access'
+  },
+  trade: {
+    title: 'Trade',
+    password: 'trade',
+    accessKey: 'kubalabs-trade-access'
   }
 };
 
