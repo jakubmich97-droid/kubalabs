@@ -411,6 +411,8 @@ h1, h2, h3, p { margin-top: 0; }
 .visual-tripatlas::before { background: linear-gradient(135deg, var(--blue), var(--violet)); }
 .visual-movie { background: #180e1b; }
 .visual-movie::before { background: linear-gradient(135deg, #ff4d73, var(--violet)); }
+.visual-trade { background: #0a1714; }
+.visual-trade::before { background: linear-gradient(135deg, var(--green), var(--blue)); }
 .visual-schedule { background: #17131f; }
 .visual-schedule::before { background: var(--violet); }
 .visual-mwm { background: #1b0e0c; }
@@ -454,6 +456,15 @@ h1, h2, h3, p { margin-top: 0; }
 .movie-icon .movie-play {
   fill: #c5b9ff;
   stroke: #c5b9ff;
+}
+.visual-trade .trade-icon {
+  width: 82px;
+  stroke: #75e6a7;
+  filter: drop-shadow(0 0 18px rgba(117,230,167,.27));
+}
+.trade-icon .trade-trend {
+  stroke: #78d8ff;
+  stroke-width: 2.6;
 }
 .sport-glyph {
   position: relative;
